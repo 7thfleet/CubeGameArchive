@@ -2,25 +2,31 @@
 
 #include <fmt/format.h>
 
-#include <boost/spirit/home/x3.hpp>
-
 #include <iostream>
+#include <fstream>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
-bool Parse(const std::string& str, std::vector<int>& out){
-    namespace x3 = boost::spirit::x3;
+std::vector<int> readFile(const std::string fileName){
+    std::ifstream iFile(fileName);
+    if(!iFile){
+        throw std::invalid_argument(fmt::format("Unable to open file \"{}\"", fileName));
+    }
 
-    return x3::phrase_parse(
-            str.begin(),
-            str.end(),
-            x3::lit('[') >> -(x3::int_ % ',') >> ']' >> x3::eoi,
-            x3::ascii::space,
-            out
-        );
+    std::string line;
+    std::vector<int> out;
+
+    while(std::getline(iFile, line)){
+        out.push_back(std::stoi(line));
+    }
+
+    return out;
 }
 
-std::string usage = "@@TODO";
+std::string usage = 
+R"(./MathUtils file1 file2
+Where file1 and fil2 are text files with one vector entry per line. See examples in data/)";
 
 int main(int argc, char* argv[]){
     if(argc != 3){
@@ -29,21 +35,12 @@ int main(int argc, char* argv[]){
         return 1;
     }
 
-    std::vector<int> a;
-    std::vector<int> b;
-
-    if(!Parse(std::string{argv[1]}, a)){
-        std::cerr << "Error parsing the first vector\n";
-        return 2;
-    }
-
-    if(!Parse(std::string{argv[2]}, b)){
-        std::cerr << "Error parsing the second vector\n";
-        return 2;
-    }
+    std::vector<int> a = readFile(argv[1]);
+    std::vector<int> b = readFile(argv[2]);
 
     fmt::print("[{}] DOT ", fmt::join(a, ", "));
     fmt::print("[{}] = ",   fmt::join(b, ", "));
     fmt::print("{}\n", MathUtils::DotProduct(a, b));
+
     return 0;
 }

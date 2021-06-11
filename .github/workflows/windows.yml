@@ -1,0 +1,25 @@
+name: Windows (MSVC)
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        build-type: [Debug, Release]
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2 # Clone repo
+
+    - name: Generate build files 
+      run: cmake -B ${{github.workspace}}/build
+
+    - name: Build project
+      # The --config option is only used on multi-config generators
+      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build-type }}
+
+    - name: Run tests
+      working-directory: ${{ github.workspace }}/build
+      # Run the tests, selecting the configuration
+      run: ctest -C ${{ matrix.build-type }} --output-on-failure

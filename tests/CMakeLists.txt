@@ -11,13 +11,9 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(doctest)
 message(STATUS "doctest successfully fetched.")
 
+
 #Add our two test directories
 add_subdirectory(MathUtils)
+
+#@@TODO This directory tests directly invoking the executable with command line arguments. It is very possible that you don't need or want this functionality. If so, simply remove the below line and folder it references.
 add_subdirectory(MathUtils-bin)
-
-
-#This is a bit of magic taken from https://stackoverflow.com/a/63732435
-#By default, the test target in cmake does not actually build anything, which is dumb. This magic fixes that. You don't need to understand it, just know it lets you run `cmake --build build -t test` and it will (re)build anything out of date.
-file(WRITE "${CMAKE_BINARY_DIR}/CTestCustom.cmake"
-    "set(CTEST_CUSTOM_PRE_TEST ${CMAKE_MAKE_PROGRAM})\n"
-)
