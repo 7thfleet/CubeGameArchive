@@ -12,6 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2 # Clone repo
 
+    - name: Update Archives
+      run: sudo apt-get update
+
     - name: Install Cinder Dependencies
       run: >
         sudo apt-get install
@@ -37,7 +40,6 @@ jobs:
         gstreamer1.0-pulseaudio
         gstreamer1.0-plugins-bad
         libboost-filesystem-dev
-        --fix-missing
 
     - name: Generate build files 
       # The -DCMAKE_BUILD_TYPE variable only matters to single-config generators
