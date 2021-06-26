@@ -29,6 +29,13 @@ jobs:
         cd proj/xcode
         ./fullbuild.sh
 
+    - name: Debugging
+      run: |
+        cd ~/cache/${{ runner.os }}/Cinder
+        ls
+        tree build/lib
+        tree lib
+
     - name: Generate build files 
       # The -DCMAKE_BUILD_TYPE variable only matters to single-config generators
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder
