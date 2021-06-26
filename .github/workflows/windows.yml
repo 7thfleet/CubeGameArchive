@@ -12,6 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2 # Clone repo
 
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
     - name: Cache Cinder
       id: cache-cinder
       uses: actions/cache@v2
