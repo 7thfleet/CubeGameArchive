@@ -49,7 +49,7 @@ jobs:
 
     - name: Build project
       # The --config option is only used on multi-config generators
-      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build-type }} -- /MD
+      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build-type }} -- -property:RuntimeLibrary=MD
 
     - name: Run tests
       working-directory: ${{ github.workspace }}/build
