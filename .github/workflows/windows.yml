@@ -27,6 +27,7 @@ jobs:
       run: |
         mkdir ~/cache/${{ runner.os }} -ea 0
         cd  ~/cache/${{ runner.os }}
+        rm -rf Cinder
         git clone --recursive --depth 1 https://github.com/cinder/Cinder.git
         cd Cinder
         cmake -B build
@@ -39,7 +40,7 @@ jobs:
         tree lib
 
     - name: Generate build files 
-      run: cmake -B ${{github.workspace}}/build -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder
 
     - name: Build project
       # The --config option is only used on multi-config generators

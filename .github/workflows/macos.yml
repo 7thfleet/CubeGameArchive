@@ -24,6 +24,7 @@ jobs:
       run: |
         mkdir -p ~/cache/${{ runner.os }}
         cd  ~/cache/${{ runner.os }}
+        rm -rf Cinder
         git clone --recursive --depth 1 https://github.com/cinder/Cinder.git
         cd Cinder
         cmake -B build
