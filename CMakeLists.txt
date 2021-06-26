@@ -4,7 +4,6 @@ cmake_minimum_required(VERSION 3.14)
 
 #Create a new project
 project(CubeGame VERSION 1.0.0 
-    #@@TODO replace below with your description
     DESCRIPTION "A simple CMake example project that computes the dot product of two vectors."
     LANGUAGES CXX
 )
@@ -40,7 +39,6 @@ target_link_libraries(CubeGame PRIVATE fmt)
 
 #Make CubeGame-bin (our driver) depend on our library (CubeGame)
 target_link_libraries(CubeGame-bin PRIVATE CubeGame)
-
 
 
 #=====Tweak build settings=====
@@ -113,3 +111,11 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
     include(CTest)
     add_subdirectory(tests)
 endif()
+
+include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
+ci_make_app(
+    APP_NAME    "CubeGameTest"
+    CINDER_PATH ${CINDER_PATH}
+    SOURCES     src/app.cpp
+    INCLUDES    include/CubeGame
+)
