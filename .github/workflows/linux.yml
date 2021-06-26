@@ -51,15 +51,11 @@ jobs:
     - name: Clone & Build Cinder
       #if: steps.cache-cinder.outputs.cache-hit != 'true'
       run: |
-        pwd
-        ls -la
         mkdir -p ~/cache
         cd ~/cache
-        ls -la
         git clone --recursive --depth 1 --branch v0.9.2 https://github.com/cinder/Cinder.git
-        ls -la
         cd Cinder
-        cmake -S Cinder -B build -DCMAKE_RELEASE_TYPE=RelWithDebInfo
+        cmake -B build -DCMAKE_RELEASE_TYPE=RelWithDebInfo
         cmake --build build
 
     - name: Generate build files 
