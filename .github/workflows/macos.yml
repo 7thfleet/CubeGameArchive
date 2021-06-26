@@ -20,12 +20,13 @@ jobs:
         key: ${{ runner.os }}-cinder-latest
 
     - name: Clone & Build Cinder
-      if: steps.cache-cinder.outputs.cache-hit != 'true'
+      #if: steps.cache-cinder.outputs.cache-hit != 'true'
       run: |
         mkdir -p ~/cache/${{ runner.os }}
         cd  ~/cache/${{ runner.os }}
         git clone --recursive --depth 1 https://github.com/cinder/Cinder.git
         cd Cinder
+        cmake -B build
         cd proj/xcode
         ./fullbuild.sh
 
@@ -34,7 +35,6 @@ jobs:
         brew install tree 
         cd ~/cache/${{ runner.os }}/Cinder
         ls
-        tree build/lib
         tree lib
 
     - name: Generate build files 

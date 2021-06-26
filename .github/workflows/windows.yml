@@ -23,13 +23,20 @@ jobs:
         key: ${{ runner.os }}-cinder-latest
 
     - name: Clone & Build Cinder
-      if: steps.cache-cinder.outputs.cache-hit != 'true'
+      #if: steps.cache-cinder.outputs.cache-hit != 'true'
       run: |
         mkdir ~/cache/${{ runner.os }} -ea 0
         cd  ~/cache/${{ runner.os }}
         git clone --recursive --depth 1 https://github.com/cinder/Cinder.git
         cd Cinder
+        cmake -B build
         msbuild proj/vc2019/cinder.sln
+
+    - name: Debugging
+      run: |
+        cd ~/cache/${{ runner.os }}/Cinder
+        ls
+        tree lib
 
     - name: Generate build files 
       run: cmake -B ${{github.workspace}}/build -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder
