@@ -20,7 +20,7 @@ jobs:
         key: ${{ runner.os }}-cinder-snapshot
 
     - name: Clone & Build Cinder
-      #if: steps.cache-cinder.outputs.cache-hit != 'true'
+      if: steps.cache-cinder.outputs.cache-hit != 'true'
       run: |
         mkdir -p ~/cache/${{ runner.os }}
         cd  ~/cache/${{ runner.os }}
