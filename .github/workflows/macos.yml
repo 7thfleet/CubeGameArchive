@@ -36,6 +36,7 @@ jobs:
         brew install tree
         cd ~/cache/${{ runner.os }}/Cinder
         ls
+        tree .
         tree lib
         tree build
 
