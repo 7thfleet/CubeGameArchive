@@ -12,8 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2 # Clone repo
 
+    - name: ls1
+      run: ls /var/cache/apt/archives/ | wc -l
+
     - name: Update Archives
       run: sudo apt-get update
+
+    - name: ls2
+      run: ls /var/cache/apt/archives/ | wc -l
 
     - name: Install Cinder Dependencies
       run: >
@@ -41,18 +47,21 @@ jobs:
         libboost-filesystem-dev
         libmpg123-dev
 
+    - name: ls3
+      run: ls /var/cache/apt/archives/ | wc -l
+
     - name: Cache Cinder
       id: cache-cinder
       uses: actions/cache@v2
       with:
-        path: ~/cache
+        path: ~/cache/${{ runner.os }}/Cinder
         key: ${{ runner.os }}-cinder-v0.9.2
 
     - name: Clone & Build Cinder
       #if: steps.cache-cinder.outputs.cache-hit != 'true'
       run: |
-        mkdir -p ~/cache
-        cd ~/cache
+        mkdir -p ~/cache/${{ runner.os }}
+        cd  ~/cache/${{ runner.os }}
         git clone --recursive --depth 1 --branch v0.9.2 https://github.com/cinder/Cinder.git
         cd Cinder
         cmake -B build -DCMAKE_RELEASE_TYPE=RelWithDebInfo
