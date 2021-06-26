@@ -37,6 +37,7 @@ jobs:
         cd ~/cache/${{ runner.os }}/Cinder
         ls
         tree lib
+        tree build
 
     - name: Generate build files
       # The -DCMAKE_BUILD_TYPE variable only matters to single-config generators
