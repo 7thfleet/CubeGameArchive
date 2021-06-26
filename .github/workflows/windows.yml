@@ -30,7 +30,6 @@ jobs:
         git clone --recursive --depth 1 https://github.com/cinder/Cinder.git
         cd Cinder
         msbuild proj/vc2019/cinder.sln
-        ls .
 
     - name: Generate build files 
       run: cmake -B ${{github.workspace}}/build
