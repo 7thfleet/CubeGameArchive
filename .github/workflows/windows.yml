@@ -29,6 +29,9 @@ jobs:
         cd  ~/cache/${{ runner.os }}
         git clone --recursive --depth 1 --branch v0.9.2 https://github.com/cinder/Cinder.git
         cd Cinder
+        pwd
+        ls proj
+        ls proj/vc2019
         cat proj/vc2019/cinder.sln
         cd proj/vc2019
         msbuild cinder.sln
