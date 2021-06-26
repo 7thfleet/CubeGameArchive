@@ -26,10 +26,7 @@ jobs:
         cd  ~/cache/${{ runner.os }}
         git clone --recursive --depth 1 --branch v0.9.2 https://github.com/cinder/Cinder.git
         cd Cinder
-        cmake -B build -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCXX_STANDARD=17
-        cmake --build build --config Release -- /verbosity:detailed /std:c++17
-        cmake --build build --config RelWithDebInfo
-        cmake --build build --config Debug
+        msbuild proj/vc2019/cinder.sln
         ls build
 
     - name: Generate build files 

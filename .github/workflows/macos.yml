@@ -26,9 +26,10 @@ jobs:
         cd  ~/cache/${{ runner.os }}
         git clone --recursive --depth 1 --branch v0.9.2 https://github.com/cinder/Cinder.git
         cd Cinder
-        xcrun xcodebuild -project proj/xcode/cinder.xcodeproj -target cinder -configuration Release $@
-        xcrun xcodebuild -project proj/xcode/cinder.xcodeproj -target cinder -configuration RelWithDebInfo $@
-        xcrun xcodebuild -project proj/xcode/cinder.xcodeproj -target cinder -configuration Debug $@
+        ./proj/xcode/osx-build-xcpretty.sh
+        #xcrun xcodebuild -project proj/xcode/cinder.xcodeproj -target cinder -configuration Release $@
+        #xcrun xcodebuild -project proj/xcode/cinder.xcodeproj -target cinder -configuration RelWithDebInfo $@
+        #xcrun xcodebuild -project proj/xcode/cinder.xcodeproj -target cinder -configuration Debug $@
 
     - name: Generate build files 
       # The -DCMAKE_BUILD_TYPE variable only matters to single-config generators
