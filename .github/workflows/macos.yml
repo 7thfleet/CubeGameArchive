@@ -31,7 +31,7 @@ jobs:
 
     - name: Debugging
       run: |
-        sudo brew install tree 
+        brew install tree 
         cd ~/cache/${{ runner.os }}/Cinder
         ls
         tree build/lib
