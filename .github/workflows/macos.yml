@@ -33,14 +33,18 @@ jobs:
 
     - name: Debugging
       run: |
-        brew install tree 
+        brew install tree
         cd ~/cache/${{ runner.os }}/Cinder
         ls
         tree lib
 
-#    - name: Generate build files 
-#      # The -DCMAKE_BUILD_TYPE variable only matters to single-config generators
-#      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder
+    - name: Generate build files
+      # The -DCMAKE_BUILD_TYPE variable only matters to single-config generators
+      run: >
+        cmake -B ${{github.workspace}}/build
+        -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
+        -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder
+        -Dcinder_PATH=~/cache/${{ runner.os }}/Cinder/lib/macosx/Debug
 #
 #    - name: Build project
 #      run: cmake --build ${{ github.workspace }}/build
