@@ -47,11 +47,11 @@ jobs:
         -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE
         -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder
 
-    #- name: Build project
-    #  # The --config option is only used on multi-config generators
-    #  run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build-type }}
+    - name: Build project
+      # The --config option is only used on multi-config generators
+      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build-type }}
 
-    #- name: Run tests
-    #  working-directory: ${{ github.workspace }}/build
-    #  # Run the tests, selecting the configuration
-    #  run: ctest -C ${{ matrix.build-type }} --output-on-failure
+    - name: Run tests
+      working-directory: ${{ github.workspace }}/build
+      # Run the tests, selecting the configuration
+      run: ctest -C ${{ matrix.build-type }} --output-on-failure
