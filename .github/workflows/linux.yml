@@ -46,7 +46,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/cache/${{ runner.os }}/Cinder
-        key: ${{ runner.os }}-cinder-latest
+        key: ${{ runner.os }}-cinder-snapshot
 
     - name: Clone & Build Cinder
       #if: steps.cache-cinder.outputs.cache-hit != 'true'

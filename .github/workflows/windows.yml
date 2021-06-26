@@ -20,7 +20,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/cache/${{ runner.os }}/Cinder
-        key: ${{ runner.os }}-cinder-latest
+        key: ${{ runner.os }}-cinder-snapshot
 
     - name: Clone & Build Cinder
       #if: steps.cache-cinder.outputs.cache-hit != 'true'
@@ -29,7 +29,7 @@ jobs:
         cd  ~/cache/${{ runner.os }}
         #Easier than testing if the file exists. Prevents the rm command from erroring
         mkdir Cinder -ea 0
-        rm Cinder
+        rm Cinder /Force
         git clone --recursive --depth 1 https://github.com/cinder/Cinder.git
         cd Cinder
         cmake -B build
