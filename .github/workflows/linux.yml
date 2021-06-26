@@ -41,19 +41,26 @@ jobs:
         libboost-filesystem-dev
         libmpg123-dev
 
+    - name: ls
+      run: |
+        pwd
+        ls -la
 
     - name: Cache Cinder
       id: cache-cinder
       uses: actions/cache@v2
       with:
-        path: ~/.cache/Cinder
+        path: ~/cache
         key: ${{ runner.os }}-cinder-v0.9.2
 
     - name: Clone & Build Cinder
       #if: steps.cache-cinder.outputs.cache-hit != 'true'
-      working-directory: ~/
+      working-directory: ~/cache
       run: |
+        pwd
+        ls -la
         git clone --recursive --depth 1 --branch v0.9.2 git@github.com:cinder/Cinder.git
+        ls -la
         cd Cinder
         cmake -S Cinder -B build -DCMAKE_RELEASE_TYPE=RelWithDebInfo
         cmake --build build
