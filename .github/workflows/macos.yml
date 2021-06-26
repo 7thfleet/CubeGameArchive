@@ -43,8 +43,9 @@ jobs:
       run: >
         cmake -B ${{github.workspace}}/build
         -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
-        -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder
-        -Dcinder_DIR=~/cache/${{ runner.os }}/Cinder/lib/macosx/Debug
+        -DCMAKE_PREFIX_PATH=~/cache/${{ runner.os }}/Cinder/lib/macosx/Debug/
+        -Dcinder_DIR=~/cache/${{ runner.os }}/Cinder/lib/macosx/Debug/
+        -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder/
 #
 #    - name: Build project
 #      run: cmake --build ${{ github.workspace }}/build
