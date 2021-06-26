@@ -49,7 +49,7 @@ jobs:
 
     - name: Build project
       # The --config option is only used on multi-config generators
-      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build-type }} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE
+      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build-type }} -- /MD
 
     - name: Run tests
       working-directory: ${{ github.workspace }}/build

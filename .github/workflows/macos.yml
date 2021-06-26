@@ -46,11 +46,11 @@ jobs:
         -DCMAKE_PREFIX_PATH=~/cache/${{ runner.os }}/Cinder/lib/macosx/Debug/
         -Dcinder_DIR=~/cache/${{ runner.os }}/Cinder/lib/macosx/Debug/
         -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder/
-#
-#    - name: Build project
-#      run: cmake --build ${{ github.workspace }}/build
-#
-#    - name: Run tests
-#      working-directory: ${{ github.workspace }}/build
-#      # Run the tests
-#      run: ctest -C --output-on-failure
+
+    - name: Build project
+      run: cmake --build ${{ github.workspace }}/build
+
+    - name: Run tests
+      working-directory: ${{ github.workspace }}/build
+      # Run the tests
+      run: ctest -C --output-on-failure

@@ -75,7 +75,6 @@ jobs:
         cmake -B ${{github.workspace}}/build
         -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
         -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder
-        -Dcinder_PATH=~/cache/${{ runner.os }}/Cinder/lib/linux/x86_64/ogl/${{ matrix.build-type }}
 
     - name: Build project
       run: cmake --build ${{ github.workspace }}/build
