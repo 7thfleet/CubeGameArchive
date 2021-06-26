@@ -56,12 +56,12 @@ jobs:
         rm -rf Cinder
         git clone --recursive --depth 1 https://github.com/cinder/Cinder.git
         cd Cinder
-        #cmake -B build -DCMAKE_BUILD_TYPE=Release
-        #cmake --build build
+        cmake -B build -DCMAKE_BUILD_TYPE=Release
+        cmake --build build
         cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
         cmake --build build
-        #cmake -B build -DCMAKE_BUILD_TYPE=Debug
-        #cmake --build build
+        cmake -B build -DCMAKE_BUILD_TYPE=Debug
+        cmake --build build
 
     - name: Debugging
       run: |
@@ -69,14 +69,14 @@ jobs:
         ls
         tree lib
 
-    - name: Generate build files 
-      # The -DCMAKE_BUILD_TYPE variable only matters to single-config generators
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder/lib/linux/x86_64/ogl/RelWithDebInfo #@@TODO
+    #- name: Generate build files 
+    #  # The -DCMAKE_BUILD_TYPE variable only matters to single-config generators
+    #  run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DCINDER_PATH=~/cache/${{ runner.os }}/Cinder/lib/linux/x86_64/ogl/RelWithDebInfo #@@TODO
 
-    - name: Build project
-      run: cmake --build ${{ github.workspace }}/build
+    #- name: Build project
+    #  run: cmake --build ${{ github.workspace }}/build
 
-    - name: Run tests
-      working-directory: ${{ github.workspace }}/build
-      # Run the tests
-      run: ctest -C --output-on-failure
+    #- name: Run tests
+    #  working-directory: ${{ github.workspace }}/build
+    #  # Run the tests
+    #  run: ctest -C --output-on-failure
