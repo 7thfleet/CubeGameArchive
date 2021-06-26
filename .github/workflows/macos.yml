@@ -20,7 +20,7 @@ jobs:
         key: ${{ runner.os }}-cinder-latest
 
     - name: Clone & Build Cinder
-      #if: steps.cache-cinder.outputs.cache-hit != 'true'
+      if: steps.cache-cinder.outputs.cache-hit != 'true'
       run: |
         mkdir -p ~/cache/${{ runner.os }}
         cd  ~/cache/${{ runner.os }}
@@ -28,12 +28,6 @@ jobs:
         cd Cinder
         cd proj/xcode
         ./fullbuild.sh
-        #cmake -B build -
-        #cmake --build build
-        #./proj/xcode/osx-build-xcpretty.sh
-        #xcrun xcodebuild -project proj/xcode/cinder.xcodeproj -target cinder -configuration Release $@
-        #xcrun xcodebuild -project proj/xcode/cinder.xcodeproj -target cinder -configuration RelWithDebInfo $@
-        #xcrun xcodebuild -project proj/xcode/cinder.xcodeproj -target cinder -configuration Debug $@
 
     - name: Generate build files 
       # The -DCMAKE_BUILD_TYPE variable only matters to single-config generators
