@@ -55,11 +55,11 @@ jobs:
         cd  ~/cache/${{ runner.os }}
         git clone --recursive --depth 1 https://github.com/cinder/Cinder.git
         cd Cinder
-        cmake -B build -DCMAKE_RELEASE_TYPE=Release
+        cmake -B build -DCMAKE_BUILD_TYPE=Release
         cmake --build build
-        cmake -B build -DCMAKE_RELEASE_TYPE=RelWithDebInfo
+        cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
         cmake --build build
-        cmake -B build -DCMAKE_RELEASE_TYPE=Debug
+        cmake -B build -DCMAKE_BUILD_TYPE=Debug
         cmake --build build
 
     - name: Debugging
